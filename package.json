@@ -1,0 +1,15 @@
+{
+  "name": "collector-final",
+  "version": "1.0.0",
+  "description": "This repository includes 5 servers housed in Docker Containers. These will handle your app's metrics, logs, and traces.    The otel server is our collector. All telemetry will be sent from your app to the collector, which will then process and export the data to the appropriate storage server.    The Prometheus server collects and stores metrics   The Loki server collects and stores logs   The Tempo server collects and stores traces.    The Grafana server is used to query each of the telemetry storage servers, and to visualize the telemetry.",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "js-yaml": "^4.1.0"
+  }
+}
