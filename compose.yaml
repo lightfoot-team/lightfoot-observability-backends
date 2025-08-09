@@ -39,7 +39,7 @@ services:
       - '-config.file=/etc/tempo.yaml'
     volumes:
       - ./tempo.yaml:/etc/tempo.yaml
-      - ./tempo-data:/var/tempo
+      - ./tempo-data:/var/tempo #tmp?
     ports:
       - '3200'
       - '4317'

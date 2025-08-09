@@ -10,7 +10,7 @@ common:
   path_prefix: /tmp/loki
 schema_config:
   configs:
-    - from: 2020-05-15T00:00:00.000Z
+    - from: 2020-05-15
       store: tsdb
       object_store: filesystem
       schema: v13
