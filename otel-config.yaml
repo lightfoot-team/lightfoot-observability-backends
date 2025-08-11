@@ -46,10 +46,7 @@ receivers:
         from: attributes.message
         to: body
 processors:
-  batch:
-    send_batch_size: 100
-    send_batch_max_size: 100
-    timeout: 5s
+  batch: null
 exporters:
   prometheus:
     endpoint: 0.0.0.0:8889
