@@ -10,25 +10,6 @@ services:
       - "/var/tempo"
     volumes:
       - ./tempo-data:/var/tempo
-  otel-collector:
-    image: otel/opentelemetry-collector-contrib:0.128.0
-    container_name: otel-collector
-    volumes:
-      - ./otel-config.yaml:/etc/otelcol-contrib/config.yaml
-      # added this to mount the toy app's logs folder so the Collector can see them
-      # - ../../toy-app/logs:/logs
-      - ${LOG_PATH}:/logs
-    ports:
-      - 8888:8888 # Prometheus metrics exposed by the Collector
-      - 8889:8889 # Prometheus exporter metrics
-      # - 13133:13133 # health_check extension
-      - 4317:4317 # OTLP gRPC receiver
-      - 4318:4318 # OTLP http receiver
-      # - 55679:55679 # zpages extension
-
-    command: ["--config=/etc/otelcol-contrib/config.yaml"]
-    networks:
-      - observability
 
   prometheus:
     image: prom/prometheus
@@ -82,3 +63,5 @@ services:
 
 networks:
   observability:
+    name: observability
+    driver: bridge
