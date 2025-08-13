@@ -11,7 +11,7 @@ Prerequisites
 
 1. Git clone this repository outside your application. 
 2. Now, we'll start the backend storage servers (Prometheus, Loki, Tempo) and Grafana server from containers.
-3. From the terminal, navigate to the `collector` directory
+3. From the terminal, navigate to the `observability-backend` directory
 4. Enter the following:
   `docker compose up`
   Note: This currently spins them up locally. 
