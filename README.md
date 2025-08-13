@@ -1,27 +1,18 @@
 # Setting up the Collector and Observability Storage
-This repository includes 5 servers housed in Docker Containers. These will handle your app's metrics, logs, and traces. 
-  The otel server is our collector. All telemetry will be sent from your app to the collector, which will then process and export the data to the appropriate storage server. 
-  The Prometheus server collects and stores metrics
-  The Loki server collects and stores logs
-  The Tempo server collects and stores traces. 
-  The Grafana server is used to query each of the telemetry storage servers, and to visualize the telemetry. 
+This repository includes 4 servers housed in Docker Containers. These will handle your app's metrics, logs, and traces. 
+- The Prometheus server collects and stores metrics
+- The Loki server collects and stores logs
+- The Tempo server collects and stores traces. 
+- The Grafana server is used to query each of the telemetry storage servers, and to visualize the telemetry. 
 
 ## Starting the servers
 Prerequisites
--You'll need a local installation of Docker and Docker Compose and to have docker desktop open. 
+- You'll need a local installation of Docker and Docker Compose and to have docker desktop open. 
 
 1. Git clone this repository outside your application. 
-2. To emit enriched logs to the collector, you'll need to store your logs in a file in your application. 
-    Then you'll need to mount the path to that file within the collector.
-    See "Setting things up in Consumer App" for more details 
-3. In the top level of the Collector directory, add a .env file containing the following:
-    `LOG_PATH=<Path to your logs file here, remove brackets>`
-  Example path:
-    `LOG_PATH=../../toy-app/logs`
-4. Next, we'll start the backend storage servers (Prometheus, Loki, Tempo) and Grafana server from containers:
-  Do not move to this step until you've set up your log path and logging file. 
-5. From the terminal, navigate to the `collector` directory
-6. Enter the following:
+2. Now, we'll start the backend storage servers (Prometheus, Loki, Tempo) and Grafana server from containers.
+3. From the terminal, navigate to the `collector` directory
+4. Enter the following:
   `docker compose up`
   Note: This currently spins them up locally. 
   Note: This will raise an error if you haven't set up your logging yet. 
@@ -38,3 +29,6 @@ Prerequisites
 9. Copy the token to your clipboard
 10. Navigate back to the Feature Flag Manager Frontend directory
 11. Add the token to the .env file, assigned to the variable `VITE_GRAFANA_TOKEN`, noted in the steps for setting up the feature flag manager.
+
+## Distributed Deployment
+If you are deploying the observability backend on a machine separate from your collector, you will need to change the `target` in the `prom-config.yml` file. Replace `otel-collector:8889` with `<<IP Address of your machine>>:8889`.
