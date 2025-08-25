@@ -32,3 +32,28 @@ Prerequisites
 
 ## Distributed Deployment
 If you are deploying the observability backend on a machine separate from your collector, you will need to change the `target` in the `prom-config.yml` file. Replace `otel-collector:8889` with `<<IP Address of your machine>>:8889`.
+
+# Deploy on AWS
+
+## Prerequisites 
+  An AWS account
+  A command line interface (CLI)
+  Install the Elastic Beanstalk CLI and then configure it.
+  A local installation of Docker and Docker Compose and to have docker desktop open. 
+  You can test that the application works locally by following the local set up steps. 
+
+## Deploy your Docker Compose application with the EB CLI
+  Elastic Beanstalk lets you deploy web applications into the AWS Cloud on a variety of supported platforms. Elastic Beanstalk provisions Amazon EC2 instances, configures load balancing, sets up health monitoring, and dynamically scales your environment.
+
+## Create an environment and deploy your Docker Compose application
+  From the terminal, navigate to the collector directory of the SDK:
+  Initialize your EB CLI repository with the eb init command.
+    Note: Use the appropriate AWS region for you. 
+    Example: `eb init -p docker lightfoot-collector --region us-east-2`
+  This command creates an application named lightfoot-collector and configures your local repository to create environments with the latest Docker platform version.
+  (Optional) Run eb init again to configure a default key pair so that you can use SSH to connect to the EC2 instance running your  application.
+  Select a key pair if you have one already, or follow the prompts to create one. If you don't see the prompt or need to change your settings later, run `eb init -i`
+  Create an environment and deploy your application to it with eb create.
+  Elastic Beanstalk automatically detects your docker-compose.yml file and deploys your multi-container application.
+    `eb create lightfoot-collector`
+  Once deployed, you can go to your AWS account and configure your instance, security groups, cloudwatch and the privacy of your instance IP. 
